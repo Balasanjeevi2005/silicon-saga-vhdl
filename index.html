@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Silicon Saga: VHDL Quest</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #111; color: #eee; padding: 20px; }
+    h1 { color: #00ffc3; }
+    .story, .question, .result { margin-top: 20px; }
+    button { padding: 10px; margin: 5px; cursor: pointer; background: #00ffc3; color: #000; border: none; border-radius: 5px; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <h1>Silicon Saga: VHDL Quest</h1>
+  <div class="story">
+    <p>You are Neo, a young engineer entering the digital city of Logica. Your mission is to help design a secure system using VHDL knowledge. Beware — you only have 3 chances. More than 3 wrong answers will reboot the simulation!</p>
+  </div>
+
+  <div class="question" id="q1">
+    <p><strong>Q1:</strong> What does the keyword `entity` define in VHDL?</p>
+    <button onclick="answer(1, 'q1', true)">The external interface of a design</button>
+    <button onclick="answer(1, 'q1', false)">A variable inside a process</button>
+    <button onclick="answer(1, 'q1', false)">A logic gate</button>
+  </div>
+
+  <div class="question hidden" id="q2">
+    <p><strong>Q2:</strong> What is the purpose of a `process` block in VHDL?</p>
+    <button onclick="answer(2, 'q2', true)">To group sequential logic and sensitivity list</button>
+    <button onclick="answer(2, 'q2', false)">To define clock speed</button>
+    <button onclick="answer(2, 'q2', false)">To store values permanently</button>
+  </div>
+
+  <div class="question hidden" id="q3">
+    <p><strong>Q3:</strong> What is the default signal assignment operator in VHDL?</p>
+    <button onclick="answer(3, 'q3', true)">&lt;=</button>
+    <button onclick="answer(3, 'q3', false)">=</button>
+    <button onclick="answer(3, 'q3', false)">:=</button>
+  </div>
+
+  <div class="result hidden" id="result">
+    <h2 id="result-text"></h2>
+  </div>
+
+  <script>
+    let lives = 3;
+    let currentQuestion = 1;
+
+    function answer(qNum, id, isCorrect) {
+      document.getElementById(id).classList.add("hidden");
+
+      if (!isCorrect) {
+        lives--;
+        if (lives === 0) {
+          document.getElementById("result").classList.remove("hidden");
+          document.getElementById("result-text").innerText = "You failed the quest! The digital world resets...";
+          return;
+        }
+      }
+
+      currentQuestion++;
+      if (currentQuestion <= 3) {
+        document.getElementById("q" + currentQuestion).classList.remove("hidden");
+      } else {
+        document.getElementById("result").classList.remove("hidden");
+        document.getElementById("result-text").innerText = "Mission Accomplished! You are now a VHDL Guardian.";
+      }
+    }
+  </script>
+</body>
+</html>
